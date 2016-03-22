@@ -1,5 +1,5 @@
 ## parseArgv
-> Parse and structure command line arguments.
+> Parse and structure command line argument options.
 
 ## Install
 ```
