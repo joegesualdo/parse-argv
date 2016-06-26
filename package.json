@@ -1,11 +1,16 @@
 {
   "name": "parse-argv",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Parse argument vectors",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "./node_modules/distify-cli/cli.js --input-file=./index.js --output-dir=./dist --is-node",
+    "prepublish": "npm run build"
   },
   "author": "Joe Gesualdo",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "distify-cli": "0.0.8"
+  }
 }

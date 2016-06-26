@@ -1,5 +1,6 @@
-function parseArgv(args) {
+function parseArgv(args, helpObj) {
   var argObj = {};
+  helpObj = helpObj || {};
 
   var i = 0;
 
@@ -33,8 +34,51 @@ function parseArgv(args) {
     }
     i++;
   }
+
+
+  argObj.help = function(){
+    var optionsString = '';
+    helpObj.options.forEach(function(option){
+      optionsString += `-${option.alias}, --${option.flag}  ${option.description}\n`
+    })
+    var examplesString = '';
+    helpObj.examples.forEach(function(example){
+      examplesString += `${example.usage}\n${example.output}\n`;
+    })
+    var str = `
+Usage
+${helpObj.usage}
+
+Options
+${optionsString}
+
+Examples
+${examplesString}
+`
+    process.stdout.write(str)
+  }
+
+  if (argObj['help']) {
+    argObj.help()
+    process.exit();
+  }
+
+  var possibleOptions = []
+  helpObj.options.forEach(function(option) {
+    possibleOptions.push(option.flag)
+    possibleOptions.push(option.alias)
+  });
+  Object.keys(argObj).forEach(function(key){
+    if (possibleOptions.indexOf(key) === -1) {
+      if (key !== '_') {
+        console.log(`'${key}' is not a valid an option`)
+        process.exit()
+      }
+    }
+  })
   return argObj;
 }
+
 
 function isOptionOrFlag(str) {
   return isOptWithCount(str) || areOpts(str) || isOpt(str) || isFlag(str)
