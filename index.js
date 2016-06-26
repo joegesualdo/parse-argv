@@ -36,7 +36,7 @@ function parseArgv(args, helpObj) {
   }
 
 
-  argObj.help = function(){
+  function printHelp(){
     var optionsString = '';
     helpObj.options.forEach(function(option){
       optionsString += `-${option.alias}, --${option.flag}  ${option.description}\n`
@@ -58,8 +58,8 @@ ${examplesString}
     process.stdout.write(str)
   }
 
-  if (argObj['help']) {
-    argObj.help()
+  if ((Object.keys(argObj).indexOf('help') !== -1) || (Object.keys(argObj).indexOf('h') !== -1)){
+    printHelp();
     process.exit();
   }
 

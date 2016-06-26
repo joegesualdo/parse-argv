@@ -84,7 +84,7 @@ module.exports =
 	    i++;
 	  }
 
-	  argObj.help = function () {
+	  function printHelp() {
 	    var optionsString = '';
 	    helpObj.options.forEach(function (option) {
 	      optionsString += "-" + option.alias + ", --" + option.flag + "  " + option.description + "\n";
@@ -95,10 +95,10 @@ module.exports =
 	    });
 	    var str = "\nUsage\n" + helpObj.usage + "\n\nOptions\n" + optionsString + "\n\nExamples\n" + examplesString + "\n";
 	    process.stdout.write(str);
-	  };
+	  }
 
-	  if (argObj['help']) {
-	    argObj.help();
+	  if (Object.keys(argObj).indexOf('help') !== -1 || Object.keys(argObj).indexOf('h') !== -1) {
+	    printHelp();
 	    process.exit();
 	  }
 
