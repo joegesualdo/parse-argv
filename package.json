@@ -1,8 +1,8 @@
 {
   "name": "parse-argv",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Parse argument vectors",
-  "main": "index.js",
+  "main": "./dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "./node_modules/distify-cli/cli.js --input-file=./index.js --output-dir=./dist --is-node",
