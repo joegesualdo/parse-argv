@@ -1,4 +1,5 @@
 import log from '@joegesualdo/terminal-log';
+import indentString from '@joegesualdo/indent-string';
 
 function parseArgv(args, helpObj) {
   var argObj = {};
@@ -40,18 +41,18 @@ function parseArgv(args, helpObj) {
 
   function printHelp(){
     var optionsString = '';
-    optionsString += `  --help  Print the command line options and usage\n`
+    optionsString += indentString(`--help  Print the command line options and usage\n`, 2);
     helpObj.options.forEach(function(option){
-      optionsString += `  -${option.alias}, --${option.flag}  ${option.description}\n`
+      optionsString += indentString(`-${option.alias}, --${option.flag}  ${option.description}\n`, 2);
     })
 
     var examplesString = '';
     helpObj.examples.forEach(function(example){
-      examplesString += `  ${example.usage}\n  ${example.output}\n`;
+      examplesString += indentString(`${example.usage}\n  ${example.output}\n`, 2);
     })
     var str = `
 Usage
-  ${helpObj.usage}
+${indentString(helpObj.usage, 2)}
 
 Options
 ${optionsString}

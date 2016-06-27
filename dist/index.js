@@ -45,11 +45,15 @@ module.exports =
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	var _terminalLog = __webpack_require__(1);
 
 	var _terminalLog2 = _interopRequireDefault(_terminalLog);
+
+	var _indentString = __webpack_require__(3);
+
+	var _indentString2 = _interopRequireDefault(_indentString);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -92,16 +96,16 @@ module.exports =
 
 	  function printHelp() {
 	    var optionsString = '';
-	    optionsString += "  --help  Print the command line options and usage\n";
+	    optionsString += (0, _indentString2.default)('--help  Print the command line options and usage\n', 2);
 	    helpObj.options.forEach(function (option) {
-	      optionsString += "  -" + option.alias + ", --" + option.flag + "  " + option.description + "\n";
+	      optionsString += (0, _indentString2.default)('-' + option.alias + ', --' + option.flag + '  ' + option.description + '\n', 2);
 	    });
 
 	    var examplesString = '';
 	    helpObj.examples.forEach(function (example) {
-	      examplesString += "  " + example.usage + "\n  " + example.output + "\n";
+	      examplesString += (0, _indentString2.default)(example.usage + '\n  ' + example.output + '\n', 2);
 	    });
-	    var str = "\nUsage\n  " + helpObj.usage + "\n\nOptions\n" + optionsString + "\n\nExamples\n" + examplesString + "\n";
+	    var str = '\nUsage\n' + (0, _indentString2.default)(helpObj.usage, 2) + '\n\nOptions\n' + optionsString + '\n\nExamples\n' + examplesString + '\n';
 	    process.stdout.write(str);
 	  }
 
@@ -118,7 +122,7 @@ module.exports =
 	  Object.keys(argObj).forEach(function (key) {
 	    if (possibleOptions.indexOf(key) === -1) {
 	      if (key !== '_') {
-	        _terminalLog2.default.error("'" + key + "' is not a valid an option");
+	        _terminalLog2.default.error('\'' + key + '\' is not a valid an option');
 	        printHelp();
 	        process.exit();
 	      }
@@ -247,6 +251,72 @@ module.exports =
 /***/ function(module, exports) {
 
 	module.exports = require("chalk");
+
+/***/ },
+/* 3 */
+/***/ function(module, exports) {
+
+	module.exports =
+	/******/ (function(modules) { // webpackBootstrap
+	/******/ 	// The module cache
+	/******/ 	var installedModules = {};
+
+	/******/ 	// The require function
+	/******/ 	function __webpack_require__(moduleId) {
+
+	/******/ 		// Check if module is in cache
+	/******/ 		if(installedModules[moduleId])
+	/******/ 			return installedModules[moduleId].exports;
+
+	/******/ 		// Create a new module (and put it into the cache)
+	/******/ 		var module = installedModules[moduleId] = {
+	/******/ 			exports: {},
+	/******/ 			id: moduleId,
+	/******/ 			loaded: false
+	/******/ 		};
+
+	/******/ 		// Execute the module function
+	/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+
+	/******/ 		// Flag the module as loaded
+	/******/ 		module.loaded = true;
+
+	/******/ 		// Return the exports of the module
+	/******/ 		return module.exports;
+	/******/ 	}
+
+
+	/******/ 	// expose the modules object (__webpack_modules__)
+	/******/ 	__webpack_require__.m = modules;
+
+	/******/ 	// expose the module cache
+	/******/ 	__webpack_require__.c = installedModules;
+
+	/******/ 	// __webpack_public_path__
+	/******/ 	__webpack_require__.p = "";
+
+	/******/ 	// Load entry module and return exports
+	/******/ 	return __webpack_require__(0);
+	/******/ })
+	/************************************************************************/
+	/******/ ([
+	/* 0 */
+	/***/ function(module, exports) {
+
+		'use strict';
+
+		Object.defineProperty(exports, "__esModule", {
+		  value: true
+		});
+		exports.default = indentString;
+		function indentString(str) {
+		  var count = arguments.length <= 1 || arguments[1] === undefined ? 1 : arguments[1];
+
+		  return '' + ' '.repeat(count) + str;
+		}
+
+	/***/ }
+	/******/ ]);
 
 /***/ }
 /******/ ]);

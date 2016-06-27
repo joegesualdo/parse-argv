@@ -1,6 +1,6 @@
 {
   "name": "parse-argv",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Parse argument vectors",
   "main": "./dist/index.js",
   "scripts": {
@@ -11,6 +11,7 @@
   "author": "Joe Gesualdo",
   "license": "MIT",
   "dependencies": {
+    "@joegesualdo/indent-string": "0.0.1",
     "@joegesualdo/terminal-log": "0.0.5",
     "distify-cli": "0.0.8"
   }
