@@ -1,3 +1,5 @@
+import log from '@joegesualdo/terminal-log';
+
 function parseArgv(args, helpObj) {
   var argObj = {};
   helpObj = helpObj || {};
@@ -38,16 +40,18 @@ function parseArgv(args, helpObj) {
 
   function printHelp(){
     var optionsString = '';
+    optionsString += `  --help  Print the command line options and usage\n`
     helpObj.options.forEach(function(option){
-      optionsString += `-${option.alias}, --${option.flag}  ${option.description}\n`
+      optionsString += `  -${option.alias}, --${option.flag}  ${option.description}\n`
     })
+
     var examplesString = '';
     helpObj.examples.forEach(function(example){
-      examplesString += `${example.usage}\n${example.output}\n`;
+      examplesString += `  ${example.usage}\n  ${example.output}\n`;
     })
     var str = `
 Usage
-${helpObj.usage}
+  ${helpObj.usage}
 
 Options
 ${optionsString}
@@ -58,7 +62,7 @@ ${examplesString}
     process.stdout.write(str)
   }
 
-  if ((Object.keys(argObj).indexOf('help') !== -1) || (Object.keys(argObj).indexOf('h') !== -1)){
+  if (Object.keys(argObj).indexOf('help') !== -1){
     printHelp();
     process.exit();
   }
@@ -71,7 +75,8 @@ ${examplesString}
   Object.keys(argObj).forEach(function(key){
     if (possibleOptions.indexOf(key) === -1) {
       if (key !== '_') {
-        console.log(`'${key}' is not a valid an option`)
+        log.error(`'${key}' is not a valid an option`)
+        printHelp();
         process.exit()
       }
     }
